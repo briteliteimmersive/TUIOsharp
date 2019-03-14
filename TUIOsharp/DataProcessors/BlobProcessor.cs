@@ -70,6 +70,13 @@ namespace TUIOsharp.DataProcessors
                     TuioBlob blob;
                     if (!blobs.TryGetValue(id, out blob)) blob = new TuioBlob(id, bundleSource);
                     blob.Update(xPos, yPos, angle, width, height, area, velocityX, velocityY, rotationVelocity, acceleration, rotationAcceleration);
+
+                    if (message.Data.Count == 15)
+                    {
+                        blob.LocalX = (float)message.Data[13];
+                        blob.LocalY = (float)message.Data[14];
+                    }
+
                     updatedBlobs.Add(blob);
                     break;
                 case "alive":

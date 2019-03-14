@@ -13,6 +13,8 @@ namespace TUIOsharp.Entities
         public float VelocityX { get; internal set; }
         public float VelocityY { get; internal set; }
         public float Acceleration { get; internal set; }
+        public float LocalX { get; internal set; }
+        public float LocalY { get; internal set; }
 
         protected TuioEntity(int id, string source) : this(id, source, 0, 0, 0, 0, 0)
         {}
@@ -26,6 +28,8 @@ namespace TUIOsharp.Entities
             VelocityX = velocityX;
             VelocityY = velocityY;
             Acceleration = acceleration;
+            LocalX = -1.0f;
+            LocalY = -1.0f;
         }
 
     }

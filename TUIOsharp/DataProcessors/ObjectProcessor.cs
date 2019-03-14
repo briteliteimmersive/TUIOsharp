@@ -68,6 +68,13 @@ namespace TUIOsharp.DataProcessors
                     TuioObject obj;
                     if (!objects.TryGetValue(id, out obj)) obj = new TuioObject(id, classId, bundleSource);
                     obj.Update(xPos, yPos, angle, velocityX, velocityY, rotationVelocity, acceleration, rotationAcceleration);
+
+                    if (message.Data.Count == 13)
+                    {
+                        obj.LocalX = (float)message.Data[11];
+                        obj.LocalY = (float)message.Data[12];
+                    }
+
                     updatedObjects.Add(obj);
                     break;
                 case "alive":

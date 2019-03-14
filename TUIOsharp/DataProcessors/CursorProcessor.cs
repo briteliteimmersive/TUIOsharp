@@ -64,6 +64,13 @@ namespace TUIOsharp.DataProcessors
                     TuioCursor cursor;
                     if (!cursors.TryGetValue(id, out cursor)) cursor = new TuioCursor(id, bundleSource);
                     cursor.Update(xPos, yPos, velocityX, velocityY, acceleration);
+
+                    if (message.Data.Count == 9)
+                    {
+                        cursor.LocalX = (float)message.Data[7];
+                        cursor.LocalY = (float)message.Data[8];
+                    }
+
                     updatedCursors.Add(cursor);
                     break;
                 case "alive":
