@@ -11,12 +11,12 @@ namespace TUIOsharp.Entities
         public float RotationVelocity { get; internal set; }
         public float RotationAcceleration { get; internal set; }
 
-        public TuioObject(int id, int classId)
-            : this(id, classId, 0, 0, 0, 0, 0, 0, 0, 0)
+        public TuioObject(int id, int classId, string source)
+            : this(id, classId, source, 0, 0, 0, 0, 0, 0, 0, 0)
         {}
 
-        public TuioObject(int id, int classId, float x, float y, float angle, float velocityX, float velocityY, float rotationVelocity, float acceleration, float rotationAcceleration)
-            : base(id, x, y, velocityX, velocityY, acceleration)
+        public TuioObject(int id, int classId, string source, float x, float y, float angle, float velocityX, float velocityY, float rotationVelocity, float acceleration, float rotationAcceleration)
+            : base(id, source, x, y, velocityX, velocityY, acceleration)
         {
             ClassId = classId;
             Angle = angle;

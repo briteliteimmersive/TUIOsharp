@@ -33,6 +33,7 @@ namespace TUIOsharp.DataProcessors
         private List<TuioBlob> updatedBlobs = new List<TuioBlob>();
         private List<int> addedBlobs = new List<int>();
         private List<int> removedBlobs = new List<int>();
+        private string bundleSource = "";
 
         #endregion
 
@@ -45,6 +46,11 @@ namespace TUIOsharp.DataProcessors
             var command = message.Data[0].ToString();
             switch (command)
             {
+                case "source":
+                    if (message.Data.Count < 2) return;
+                    bundleSource = (string)message.Data[1];
+                    break;
+
                 case "set":
                     if (message.Data.Count < 13) return;
 
@@ -62,7 +68,7 @@ namespace TUIOsharp.DataProcessors
                     var rotationAcceleration = (float)message.Data[12];
 
                     TuioBlob blob;
-                    if (!blobs.TryGetValue(id, out blob)) blob = new TuioBlob(id);
+                    if (!blobs.TryGetValue(id, out blob)) blob = new TuioBlob(id, bundleSource);
                     blob.Update(xPos, yPos, angle, width, height, area, velocityX, velocityY, rotationVelocity, acceleration, rotationAcceleration);
                     updatedBlobs.Add(blob);
                     break;
@@ -110,6 +116,7 @@ namespace TUIOsharp.DataProcessors
                     addedBlobs.Clear();
                     removedBlobs.Clear();
                     updatedBlobs.Clear();
+                    bundleSource = "";
                     break;
             }
         }

@@ -13,12 +13,12 @@ namespace TUIOsharp.Entities
         public float RotationVelocity { get; internal set; }
         public float RotationAcceleration { get; internal set; }
 
-        public TuioBlob(int id)
-            : this(id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        public TuioBlob(int id, string source)
+            : this(id, source, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         {}
 
-        public TuioBlob(int id, float x, float y, float angle, float width, float height, float area, float velocityX, float velocityY, float rotationVelocity, float acceleration, float rotationAcceleration)
-            : base(id, x, y, velocityX, velocityY, acceleration)
+        public TuioBlob(int id, string source, float x, float y, float angle, float width, float height, float area, float velocityX, float velocityY, float rotationVelocity, float acceleration, float rotationAcceleration)
+            : base(id, source, x, y, velocityX, velocityY, acceleration)
         {
             Angle = angle;
             Width = width;
@@ -37,7 +37,7 @@ namespace TUIOsharp.Entities
             Height = height;
             Area = area;
             VelocityX = velocityX;
-            VelocityY = velocityY;
+            VelocityY = velocityX;
             RotationVelocity = rotationVelocity;
             Acceleration = acceleration;
             RotationAcceleration = rotationAcceleration;

@@ -6,11 +6,11 @@ namespace TUIOsharp.Entities
 {
     public class TuioCursor : TuioEntity
     {
-        public TuioCursor(int id) : this(id, 0, 0, 0, 0, 0)
+        public TuioCursor(int id, string source) : this(id, source, 0, 0, 0, 0, 0)
         {}
 
-        public TuioCursor(int id, float x, float y, float velocityX, float velocityY, float acceleration)
-            : base(id, x, y, velocityX, velocityY, acceleration)
+        public TuioCursor(int id, string source, float x, float y, float velocityX, float velocityY, float acceleration)
+            : base(id, source, x, y, velocityX, velocityY, acceleration)
         {}
 
         public void Update(float x, float y, float velocityX, float velocityY, float acceleration)

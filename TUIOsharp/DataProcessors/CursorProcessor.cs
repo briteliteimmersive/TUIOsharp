@@ -33,6 +33,7 @@ namespace TUIOsharp.DataProcessors
         private List<TuioCursor> updatedCursors = new List<TuioCursor>();
         private List<int> addedCursors = new List<int>();
         private List<int> removedCursors = new List<int>();
+        private string bundleSource = "";
 
         #endregion
 
@@ -45,6 +46,11 @@ namespace TUIOsharp.DataProcessors
             var command = message.Data[0].ToString();
             switch (command)
             {
+                case "source":
+                    if (message.Data.Count < 2) return;
+                    bundleSource = (string)message.Data[1];
+                    break;
+
                 case "set":
                     if (message.Data.Count < 7) return;
 
@@ -56,7 +62,7 @@ namespace TUIOsharp.DataProcessors
                     var acceleration = (float)message.Data[6];
 
                     TuioCursor cursor;
-                    if (!cursors.TryGetValue(id, out cursor)) cursor = new TuioCursor(id);
+                    if (!cursors.TryGetValue(id, out cursor)) cursor = new TuioCursor(id, bundleSource);
                     cursor.Update(xPos, yPos, velocityX, velocityY, acceleration);
                     updatedCursors.Add(cursor);
                     break;
@@ -104,6 +110,7 @@ namespace TUIOsharp.DataProcessors
                     addedCursors.Clear();
                     removedCursors.Clear();
                     updatedCursors.Clear();
+                    bundleSource = "";
                     break;
             }
         }
